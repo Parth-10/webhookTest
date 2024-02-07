@@ -18,4 +18,16 @@ jobs:
         SLACK_TITLE: Post Title
         SLACK_USERNAME: Parth Sharma
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }} # Corrected reference
-        SLACK_MESSAGE: "This is your custom message."
+        SLACK_MESSAGE: "Latest build successful."
+  
+  notifyTelegram:
+    runs-on: ubuntu-latest
+    steps:
+    - name: send custom message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          The ${{ github.event_name }} event triggered final step.
+          echo This event is a pull request that had an assignee removed.
